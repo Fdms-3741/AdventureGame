@@ -1,0 +1,17 @@
+{
+  "name": "characters",
+  "version": "1.0.0",
+  "description": "Characters microsservice of the Adventure Game application",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "amqplib": "^0.9.1",
+    "express": "^4.18.1",
+    "jest": "^28.1.0",
+    "mongoose": "^6.3.5"
+  }
+}
