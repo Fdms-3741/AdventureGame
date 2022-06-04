@@ -1,0 +1,32 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "name":"Player",
+    "description":"Information regarding characters",
+    "type":"Object",
+    "properties":{
+        "id":{"type":"Number"},
+        "player_id":{"type":"Number"},
+
+        "name":{"type":"String"},
+        "description":{"type":"String"},
+        "image":{"type":"String"},
+
+        "status":{"type":"Object",
+            "properties":{
+                "level":{"type":"Number"},
+                "alive":{"type":"Boolean"}
+            },
+            "required":["level","alive"]
+        },
+
+        "attributes": {"type":"Object",
+            "properties":{
+                "strength":{"type":"String"},
+                "dexterity":{"type":"String"},
+                "inteligence":{"type":"String"}
+            },
+            "required":["strength","dexterity","inteligence"]
+        }
+    },
+    "required":["id","player_id","name","description","status","attributes"]
+}
