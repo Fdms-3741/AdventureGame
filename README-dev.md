@@ -24,13 +24,22 @@ O ambiente de testes executa todos os microsserviços usando o comando `node tes
 
 O ambiente de produção faz a construção dos contêineres utilizando cópias e prepara o sistema para ser executado de forma correta. Assim, apenas o gateway tem acesso via portas. Esse ambiente será utilizado para os testes de integração.
 
+## Bibliotecas utilizadas
+* [JSDoc: Documentação](https://jsdoc.app/)
+* [MongoDB: Integração com MongoDB](https://www.mongodb.com/docs/drivers/node/current/)
+
 ## Links externos
 
 Tutoriais:
 * [Troca de mensagens pelo broker](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html)
 * [TDD: Testes para o express](https://www.luiztools.com.br/post/tdd-como-criar-integration-tests-em-node-js-com-jest/)
-* [Interface com o MongoDB](https://mongoosejs.com/docs/) 
+* [Conexão com o MongoDB](https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb-how-to-get-connected-to-your-database)
+* [Operações CRUD com o MongoDB](https://www.mongodb.com/developer/languages/javascript/node-crud-tutorial/) 
+* [Documentação de projetos de microsserviços](https://rst.software/blog/2019/03/my-approach-to-documenting-javascript-projects/)
+
 
 Dúvidas:
 * [Como ler variáveis de ambiente no JS](https://nodejs.dev/learn/how-to-read-environment-variables-from-nodejs)
 
+Links interessantes:
+* [Diagramas em markdown com mermaid](https://mermaid-js.github.io/mermaid/#/)
