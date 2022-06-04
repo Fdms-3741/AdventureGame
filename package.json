@@ -1,0 +1,22 @@
+{
+  "name": "adventuregame",
+  "version": "1.0.0",
+  "description": "RPG-like adventure game",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fdms-3741/AdventureGame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fdms-3741/AdventureGame/issues"
+  },
+  "homepage": "https://github.com/Fdms-3741/AdventureGame#readme",
+  "dependencies": {
+    "jsdoc": "^3.6.10"
+  }
+}
