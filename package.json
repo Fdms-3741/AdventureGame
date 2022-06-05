@@ -4,6 +4,7 @@
   "description": "RPG-like adventure game",
   "main": "index.js",
   "scripts": {
+    "build":"ts",
     "test": "jest"
   },
   "repository": {
