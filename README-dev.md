@@ -27,6 +27,8 @@ O ambiente de produção faz a construção dos contêineres utilizando cópias 
 ## Bibliotecas utilizadas
 * [JSDoc: Documentação](https://jsdoc.app/)
 * [MongoDB: Integração com MongoDB](https://www.mongodb.com/docs/drivers/node/current/)
+* [ajv: Validador de JSONSchema](https://github.com/ajv-validator/ajv)
+* [RabbitMQ: Biblioteca do Broker usado]()
 
 ## Links externos
 
