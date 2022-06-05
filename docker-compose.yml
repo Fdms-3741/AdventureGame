@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+# 
+  charactersdb:
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+
+  characters-dev:
+    depends_on:
+      - charactersdb
+    build: 
+      context: .
+      dockerfile: ./docker/microservice.Dockerfile
+      target: development
+      args:
+        PROJECT_ROOT_DIRECTORY: ${CHARACTERS_ROOT_DIRECTORY}
+    volumes:
+      - ${CHARACTERS_ROOT_DIRECTORY}:/app
