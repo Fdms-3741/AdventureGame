@@ -1,56 +1,39 @@
 import mongoose, {Schema, model, connect, connection} from 'mongoose';
-import CharacterInterface from './models/character';
-import * as fs from 'fs';
+import Character from './models/character';
 
-
-const CharacterSchema= new Schema<CharacterInterface>({
-    name: { type: String, required : true },
-    description: { type: String, required: true },
-    image: { type: String, required:true },
-
-    status:{
-        level: { type: Number, required: true},
-        lives: { type: Number, required: true}
-    },
-
-    attributes: {
-        strength: {type: String, required: true},
-        inteligence: { type: String, required: true},
-        dexterity: {type: String, required: true}
-    }
-})
 
 
 class CharacterDatabase{
-    
+
     private static instance : CharacterDatabase;
-    private databaseSchema : any;
-    schema : Schema<CharacterInterface>;
-    model : any
+    private static connection : mongoose.Connection;
+    private static model : typeof Character;
 
-    private async ConnectToDatabase(connectionUrl:string){
-        await mongoose.connect(connectionUrl)
-    }
-    private constructor(connectionUrl: string){
-        
-        this.ConnectToDatabase(connectionUrl)
-        /* Creates the Characters schema */
-        //his.databaseSchema = JSON.parse(fs.readFileSync(__dirname+"/models/CharacterSchema.json",'utf-8'))
-        // this.schema = new Schema<CharacterInterface>(CharacterSchema)
-
-        /* Creates model object */
-        this.model = mongoose.model<CharacterInterface>('Character',CharacterSchema);
+    private constructor(){    
+        CharacterDatabase.model = Character
     }
     
-    public static Connect(databaseUrl: string): CharacterDatabase {
+    public static async Connect(databaseUrl: string): Promise<CharacterDatabase> {
 
         if (!CharacterDatabase.instance){
-            CharacterDatabase.instance = new CharacterDatabase(databaseUrl)
+            CharacterDatabase.instance = new CharacterDatabase();
+            await mongoose.connect(databaseUrl)
         }
-        
+
         return CharacterDatabase.instance
     }
     
+    public static async Clear(){
+        for (const key in mongoose.connection.collections){
+            const collection = mongoose.connection.collections[key]
+            await collection.deleteMany({})
+        }
+    }
+
+    public static async Close(){
+        await mongoose.connection.dropDatabase()
+        await mongoose.connection.close()
+    }
 }
 
 export default CharacterDatabase

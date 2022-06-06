@@ -8,27 +8,30 @@
 /* Used libraries*/
 import express from 'express'; /* HTTP Handler */
 import * as dotenv from 'dotenv';
-import CharacterDatabase from './database';
+import Character from './models/character';
+import mongoose from 'mongoose';
 
 /* User model for  */
 
 /* Reads from dotenv file in project's root folder. Overwrites already defined ones */
-dotenv.config({path:__dirname + "/.env"})
+dotenv.config()
 
 /* Constants */
 // const GatewayAddress  = "http://gateway/"
-const MongoDBAddress  = "mongodb://" + process.env.MONGODB_USER + ":" + process.env.MONGODB_PASSWORD +"@"+process.env.MONGODB_SERVER+"/character" /* Gets username and password from environment variables set in the container */
+const MongoDBAddress  = "mongodb://" + process.env.MONGODB_USER + ":" + process.env.MONGODB_PASSWORD +"@"+process.env.MONGODB_SERVER+"" /* Gets username and password from environment variables set in the container */
 //const RabbitMQAddress = "http://broker/"
 
 /* Create application */
 const app = express()
 
 /* Connect to MongoDB database */
-let database = CharacterDatabase.Connect(MongoDBAddress)
+mongoose.connect(MongoDBAddress)
+
 
 /* Defining REST application */
 app.get("/",(req,res)=> {
-    res.write({message: "Hello world"});
+    res.sendStatus(200).send({message: "Hello world"});
 })
 
-export default app
+
+export {app,MongoDBAddress}

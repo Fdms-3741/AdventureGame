@@ -1,4 +1,4 @@
-
+import mongoose from 'mongoose'
 
 /**
  * The status indicates its current level and how many lives it still has
@@ -32,4 +32,24 @@ interface CharacterInterface{
     attributes: Attributes
 }
 
-export default CharacterInterface
+const CharacterSchema= new mongoose.Schema<CharacterInterface>({
+    name: { type: String, required : true },
+    description: { type: String, required: true },
+    image: { type: String, required:true },
+
+    status:{
+        level: { type: Number, required: true},
+        lives: { type: Number, required: true}
+    },
+
+    attributes: {
+        strength: {type: String, required: true},
+        inteligence: { type: String, required: true},
+        dexterity: {type: String, required: true}
+    }
+})
+
+let Character = mongoose.model<CharacterInterface>("characters",CharacterSchema)
+
+
+export default Character
