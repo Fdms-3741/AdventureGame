@@ -49,7 +49,6 @@ const CharacterSchema= new mongoose.Schema<CharacterInterface>({
     }
 })
 
-let Character = mongoose.model<CharacterInterface>("characters",CharacterSchema)
 
 
-export default Character
+export default CharacterSchema

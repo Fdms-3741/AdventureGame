@@ -10,6 +10,7 @@ import express from 'express'; /* HTTP Handler */
 import * as dotenv from 'dotenv';
 import Character from './models/character';
 import mongoose from 'mongoose';
+import CharacterDatabase from './database';
 
 /* User model for  */
 
@@ -25,8 +26,7 @@ const MongoDBAddress  = "mongodb://" + process.env.MONGODB_USER + ":" + process.
 const app = express()
 
 /* Connect to MongoDB database */
-mongoose.connect(MongoDBAddress)
-
+let database = CharacterDatabase.Connect(MongoDBAddress)
 
 /* Defining REST application */
 app.get("/",(req,res)=> {

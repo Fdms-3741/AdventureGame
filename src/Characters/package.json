@@ -4,8 +4,10 @@
   "description": "Characters microsservice of the Adventure Game application",
   "main": "index.js",
   "scripts": {
+    "build":"ts",
     "test": "jest --detectOpenHandles",
-    "start-dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts"
+    "start-dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
+    "start":"node ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
