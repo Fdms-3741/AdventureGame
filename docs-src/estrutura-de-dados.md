@@ -64,7 +64,6 @@ O sucesso da missão é definido segundo a regra:
 $$nível\; do\; personagem + RandInt(1,20) + modificador\; do\; atributo\; selecionado >= valor\; de\; dificuldade$$
 
 
-
 ```json
 {
     "id":21,
@@ -74,3 +73,4 @@ $$nível\; do\; personagem + RandInt(1,20) + modificador\; do\; atributo\; selec
     "modifier":"strength"
 }
 ```
+

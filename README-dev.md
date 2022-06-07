@@ -24,6 +24,21 @@ O ambiente de testes executa todos os microsserviços usando o comando `node tes
 
 O ambiente de produção faz a construção dos contêineres utilizando cópias e prepara o sistema para ser executado de forma correta. Assim, apenas o gateway tem acesso via portas. Esse ambiente será utilizado para os testes de integração.
 
+# COMO ADICIONAR UM NOVO CONTEINER AO AMBIENTE DOCKER
+
+Procure pelos contêineres characters-dev e charactersdb. O primeiro é o ambiente Node e o segundo é o MongoDB. Copie e cole essas linhas e **troque o nome delas** para o que desejar. 
+Esses nomes também servem como nome de domínio para os contêineres na rede interna dos contêineres. Por exemplo se **de dentro de um contêiner** você quer acessar via HTTP o conteiner chamado `basededados` na porta 3004, você simplesmente escreve `http://basededados:3004`.
+
+Deve-se ter docker e docker-compose instalado. Faça
+```
+docker-compose up -d
+```
+e após isso faça:
+```
+docker-compose run --rm <NOME_DO_CONTEINER_DE_AMBIENTE_NODE_CRIADO> 
+```
+vai abrir um terminal onde vc pode fazer os comandos que quiser que tenha `node ...` e afins. Caso queira rodar um único comando de uma vez pode adiciona-lo após o nome do contêiner
+
 ## Bibliotecas utilizadas
 * [JSDoc: Documentação](https://jsdoc.app/)
 * [MongoDB: Integração com MongoDB](https://www.mongodb.com/docs/drivers/node/current/)
