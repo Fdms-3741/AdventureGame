@@ -10,12 +10,20 @@ A users contém apenas o login, email e senha de cada usuário.
 
 Esses dados servirão para controle de acesso dos jogadores no sistema e associação de multiplos personagens a cada usuário.
 
+**(VER NOTA EM MAPA DE RECURSOS)** Como usuários serve para autenticação, adiciona-se o objeto de sessão para armazenar o valor do token, algumas informações do PC do cra e o tempo limite para manter a sessão aberta.
+
 ```json
 {
     "_id":2,
     "login":"nome-de-usuario",
     "email":"usu@ario.com",
-    "password":"s3nh4-s3cr3t4"
+    "password":"s3nh4-s3cr3t4",
+    "session":{
+        "token":"string aleatoria",
+        "user-agent":"O user-agent do usuário que fez o acesso",
+        "address":"endereco IP do usuário que fez o login",
+        "expires":"Sempre ser atualizado para ser 5 min depois da ultima requisição de validação da sessão"
+    }
 }
 ```
 
