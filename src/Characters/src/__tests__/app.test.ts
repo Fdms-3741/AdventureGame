@@ -44,9 +44,26 @@ describe("GET /", () => {
 
 })
 
-describe("POST /add", ()=>{
+
+describe("GET /character", ()=>{
 	it("Should return 200",async () => {
-		let response = await request(app).post("/add/").send({"name":"fidget"})
+		let response = await request(app).get("/character").send({"user_id":3,"name":"fidget"})
+		console.log(response.text)
 		expect(response?.statusCode).toBe(200)
+	})
+})
+
+describe("POST /character", () => {
+	it("Should return 200", async () =>{
+		let response = await request(app).post("/character").send({"user_id":3,"name":"fidget"})
+		console.log(response.text)
+		expect(response?.statusCode).toBe(200)
+	})
+
+	it("Should fail due to not having name", async () => {
+		let response = await request(app).post('/character').send({"user_id":12})
+		console.log(response.body)
+		expect(response?.statusCode).toBe(400)
+		expect(response?.body.message).toStrictEqual("Data failed to match schema.")
 	})
 })
