@@ -1,0 +1,3 @@
+[submodule "src/frontend"]
+	path = src/frontend
+	url = git@github.com:ricardossiqueira/adventure_game_front.git
