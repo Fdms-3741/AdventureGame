@@ -58,7 +58,8 @@ O personagem tem um objeto de `attributes` que define os atributos para cada jog
             "strength":2,
             "dexterity":4,
             "inteligence":1
-        }
+    },
+	"missions_made":[332,443,565] // IDs das missões feitas
 }
 
 ```
@@ -78,7 +79,7 @@ $$nível\; do\; personagem + RandInt(1,20) + modificador\; do\; atributo\; selec
     "name":"Nome da missão",
     "description":"História, objetivo e outras informações",
     "difficulty_value":20,
-    "modifier":"strength"
+    "modifier":"strength",
 }
 ```
 
