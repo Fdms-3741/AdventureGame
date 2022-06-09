@@ -3,6 +3,7 @@ import {Character} from '../models/Character'
 import mongoose from 'mongoose'
 
 async function Connect(){
+	console.log("Connecting to " + MONGODB_TEST_ADDRESS);
 	await mongoose.connect(MONGODB_TEST_ADDRESS,{
 		authSource:"admin"
 	}).then(()=>{console.log("connected to the database")})
