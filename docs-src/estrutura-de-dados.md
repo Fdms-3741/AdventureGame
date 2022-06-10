@@ -27,6 +27,18 @@ Esses dados servirão para controle de acesso dos jogadores no sistema e associa
 }
 ```
 
+Recomendações do armazenamento da senha:
+* A senha é enviada em claro para a API.
+* Uma vez recebido a senha, deve ser feita um hash da senha com um salt. Um salt é uma sequência de bytes aleatória e única para cada cliente. 
+* O padrão de armazenamento das senhas se dá da seguinte forma: "${algoritmo-utilizado}${salt}${resultado-do-hash}".
+    * O algoritmo é uma string com o nome do algoritmo. Ex sha-256,md5,blowfish,...
+    * O Salt é uma sequência aleatória que deve ser concatenada **ANTES** da senha do usuário. Seu valor é binário e é salvo nessa string como base 64.
+    * O resultado do hash é o resultado de implementar o algoritmo na senha concatenada com o hash. Considerando o hash como uma função que recebe um array de bytes, temos que esse valor seria sha256({salt} + base64("{password}")). 
+        * Note que aqui {password} é uma string que deve ser convertida em array de bytes.
+
+Recomendações do token:
+* Usamos o token como uma sequência aleatória e única para cada usuário de 64 bytes em base 64.
+
 ## Characters
 
 Contém as informações de cada personagem. 

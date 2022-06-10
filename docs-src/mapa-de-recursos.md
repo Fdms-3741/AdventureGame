@@ -33,8 +33,11 @@ Personagens:
 		* Remove uma vida do personagem
 		* Retorna erro se o personagem está morto (vida = 0).
 * Modificações na lista de missões concluídas pelo personagem.
-	* PUT /characters/complete-mission/{mission-id}
+	* GET /characters/achievements/
+	* POST /characters/achievements/{mission-id}
 		* Adiciona uma missão completa na lista de missões completas do personagem.
+	* DELETE /characters/achievements/{mission-id}
+		* Remove uma missão da lista de missões feitas
 
 Missões
 * CRUD de missões

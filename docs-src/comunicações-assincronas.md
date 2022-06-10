@@ -7,7 +7,7 @@ Cada microsserviço tem uma lista de possíveis eventos que devem ser
 ## Usuário
 * Usuário deletado
     * Informa ao microsserviço (MS) de personagens que um usuário foi deletado para que este apague todos os seus jogadores
-
+    
 ## Personagens
 * Associar usuário
     * Pergunta ao MS de usuário se o usuário com ID existe
