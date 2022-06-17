@@ -35,7 +35,7 @@ const CharacterSchema = new mongoose.Schema({
 	user_id: { type: Number, required:true },
 
 	name: {type: String, required: true},
-	definition: String, 
+	description: {type: String, required: true}, 
 	image: String,
 
 	status: { 
@@ -47,7 +47,8 @@ const CharacterSchema = new mongoose.Schema({
 		strength: Number,
 		dexterity: Number,
 		inteligence: Number
-	}
+	},
+	achievements: Array<Number>
 })
 
  /*

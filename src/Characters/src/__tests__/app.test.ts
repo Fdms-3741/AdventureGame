@@ -29,9 +29,6 @@ describe("Database connection conditions",()=>{
 	it("Should be connected to the database", () => {
 		expect(mongoose.connection.readyState).toBe(1)
 	})
-	
-	
-
 })
 
 describe("GET /", () => {
@@ -47,7 +44,7 @@ describe("GET /", () => {
 
 describe("GET /character", ()=>{
 	it("Should return 200",async () => {
-		let response = await request(app).get("/character").send({"user_id":3,"name":"fidget"})
+		let response = await request(app).get("/character").send({"user_id":3,"name":"francis"})
 		console.log(response.text)
 		expect(response?.statusCode).toBe(200)
 	})
@@ -55,15 +52,18 @@ describe("GET /character", ()=>{
 
 describe("POST /character", () => {
 	it("Should return 200", async () =>{
-		let response = await request(app).post("/character").send({"user_id":3,"name":"fidget"})
+		let response = await request(app).post("/character").send({"user_id":3,"name":"francis","description":"the hero's mission"})
 		console.log(response.text)
 		expect(response?.statusCode).toBe(200)
 	})
 
 	it("Should fail due to not having name", async () => {
-		let response = await request(app).post('/character').send({"user_id":12})
+		let response = await request(app).post('/character').send({"user_id":12,'description':"123"})
 		console.log(response.body)
 		expect(response?.statusCode).toBe(400)
 		expect(response?.body.message).toStrictEqual("Data failed to match schema.")
 	})
+	it("Should return the ")
 })
+
+
