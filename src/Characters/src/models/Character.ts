@@ -2,7 +2,7 @@ import mongoose, { mongo } from "mongoose";
 
 /** 
  * 
- * Character model definition 
+ * Defining the character, attributes and status interfaces
  * 
  */
 interface StatusInterface{
@@ -29,24 +29,23 @@ interface CharacterInterface{
 
 }
 
-
 const CharacterSchema = new mongoose.Schema({
 
-	user_id: { type: Number, required:true },
+	user_id: { type: mongoose.SchemaTypes.ObjectId, required:true },
 
 	name: {type: String, required: true},
 	description: {type: String, required: true}, 
 	image: String,
 
 	status: { 
-		lives:{ type: Number },
-		level: { type: Number} 
+		lives:{ type: Number ,min:0, max:4,default:4},
+		level: { type: Number, min:1, max:15,default:1} 
 	},
 
 	attributes: {
-		strength: Number,
-		dexterity: Number,
-		inteligence: Number
+		strength: {type: Number, min: 0, max: 5,default:0},
+		dexterity: {type: Number, min: 0, max: 5,default:0},
+		inteligence: {type: Number,min: 0, max: 5, default: 0}
 	},
 	achievements: Array<Number>
 })

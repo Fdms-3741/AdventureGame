@@ -39,7 +39,7 @@ describe("Database interaction", () => {
 		/* Search name  */
 		let searchname = 'John of The Johns John'
 		let player = new Character({
-			'user_id':2,
+			'user_id':"aaaaaaaaaaaaaaaaaaaaaaaa", /* Ids are ^[0-9a-fA-F]{24}$ */
 			'name': searchname,
 			'description':'Meanders through dark alleyways carriyng nothing but a big sack full of potatoes, nobody knows why.'
 		})

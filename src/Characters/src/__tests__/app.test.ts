@@ -32,15 +32,12 @@ describe("Database connection conditions",()=>{
 })
 
 describe("GET /", () => {
-	
 	it("Should connect", async () => {
 		let response = await request(app).get("/")
 		expect(response?.statusCode).toBe(200)
 		expect(response?.text).toStrictEqual("Hello there")
 	})
-
 })
-
 
 describe("GET /character", ()=>{
 	it("Should return 200",async () => {
@@ -52,18 +49,17 @@ describe("GET /character", ()=>{
 
 describe("POST /character", () => {
 	it("Should return 200", async () =>{
-		let response = await request(app).post("/character").send({"user_id":3,"name":"francis","description":"the hero's mission"})
+		let response = await request(app).post("/character").send({"user_id":"aaaaaaaaaaaaaaaaaaaaaaaa","name":"francis","description":"the hero's mission"})
 		console.log(response.text)
 		expect(response?.statusCode).toBe(200)
 	})
 
 	it("Should fail due to not having name", async () => {
-		let response = await request(app).post('/character').send({"user_id":12,'description':"123"})
+		let response = await request(app).post('/character').send({"user_id":"aaaaaaaaaaaaaaaaaaaaaaaa",'description':"123"})
 		console.log(response.body)
 		expect(response?.statusCode).toBe(400)
 		expect(response?.body.message).toStrictEqual("Data failed to match schema.")
 	})
-	it("Should return the ")
 })
 
 
