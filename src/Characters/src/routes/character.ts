@@ -8,7 +8,6 @@ character.use((request,response,next) =>{
     if (!("user_id" in request.body)){
         response.status(400).send({"message":"Request must come with appropriate user_id in body"})
     }
-    /** Check in the users MS if this user still exists */
 })
 
 /**  */
