@@ -6,7 +6,8 @@ Aqui descrevemos qual recurso é disponibilizado por cada microsserviço e o que
 
 Usuários
 * Acesso ao banco de dados de usuários
-	* GET /users?id={valor-de-id}&name={valor-de-username}: Retorna lista de usuários ou usuário com base nos termos de busca enviados
+	* GET /users: Retorna lista de usuários ou usuário com base nos termos de busca enviados
+		* Pode conter o seguinte corpo em JSON: {name?: "Nome da pessoa", id?: "id do mongoose"}
 	* POST /users: Adiciona novo usuário
 	* DELETE /users/{user-id} 
 * Autenticação de usuários
