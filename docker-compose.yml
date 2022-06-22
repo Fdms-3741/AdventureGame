@@ -1,7 +1,11 @@
 version: "3.8"
 
 services:
+#
+# Base containers
 # 
+# Contain the databases that assist the microsservices 
+#
   charactersdb:
     image: mongo:latest
     restart: always
@@ -9,9 +13,30 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
 
+  missionsdb:
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+
+  usersdb:
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+
+#
+# Testing containers
+# 
+# Containers for localized and individual testing
+#
   characters-dev:
     depends_on:
       - charactersdb
+    profiles:
+      - testing
     build: 
       context: .
       dockerfile: ./docker/microservice.Dockerfile
@@ -23,12 +48,21 @@ services:
     env_file:
       - "./.env"
 
-  usersdb:
-    image: mongo:latest
-    restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+  missions-dev:
+    depends_on:
+      - missionsdb
+    profiles:
+      - testing
+    build: 
+      context: .
+      dockerfile: ./docker/microservice.Dockerfile
+      target: development
+      args:
+        PROJECT_ROOT_DIRECTORY: ${MISSIONS_ROOT_DIRECTORY}
+    volumes:
+      - ${MISSIONS_ROOT_DIRECTORY}:/app
+    env_file:
+      - "./.env"
 
   users-dev:
     depends_on:
@@ -43,6 +77,39 @@ services:
       - ${USERS_ROOT_DIRECTORY}:/app
     env_file:
       - "./.env"
+
+#
+# Production containers
+#
+# Containers configured to run as if in production
+#
+  characters:
+    depends_on:
+      - charactersdb
+    profiles:
+      - production
+    build: 
+      context: .
+      dockerfile: ./docker/microservice.Dockerfile
+      target: production
+      args:
+        PROJECT_ROOT_DIRECTORY: ${CHARACTERS_ROOT_DIRECTORY}
+    env_file:
+      - "./.env"
+
+  frontend:
+    profiles:
+      - production
+    build: 
+      context: .
+      dockerfile: ./docker/microservice.Dockerfile
+      target: production
+      args:
+        PROJECT_ROOT_DIRECTORY: ${FRONTEND_ROOT_DIRECTORY}
+    env_file:
+      - "./.env"
+    ports:
+      - 8008:3000
 
   mongo-express:
       image: mongo-express
