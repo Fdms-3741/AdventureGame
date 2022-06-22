@@ -11,6 +11,7 @@ const MONGODB_TEST_ADDRESS = MONGODB_ADDRESS + "/tests?authSource=admin&w=1"
 /* Useful functions used throughout the project */
 async function InitializeDatabase(address:string) {
     await mongoose.connect(address,{authSource:'admin'});
+
 }
 
 async function CloseDatabase(){

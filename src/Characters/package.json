@@ -4,7 +4,9 @@
   "description": "Microsservice to handle CRUD operations over Characters model",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "build": "tsc",
+    "test": "jest --verbose",
+    "start": "node __build__/server.js"
   },
   "author": "",
   "license": "ISC",

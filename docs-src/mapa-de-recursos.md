@@ -20,8 +20,6 @@ Personagens:
 	* GET /characters: Lista com todos os personagens
 	* GET /characters/{user-id}: Lista com todos os personagens de um usuário
 	* GET /characters/{user-id}/{character-id}: Retorna dados do personagem pertencente ao usuário
-	* GET /characters/alive/{user-id}: Lista com todos os personagens vivos de um usuário
-	* GET /characters/dead/{user-id}: Lista com todos os personagens mortos de um usuário
 * Criação de personagens
 	* POST /characters/{user-id}: Cria um novo personagem para o usuário com user-id
 		* Recebe apenas nome, imagem e descrição do personagem. Os outros são definidos pelo programa
@@ -34,8 +32,7 @@ Personagens:
 		* Remove uma vida do personagem
 		* Retorna erro se o personagem está morto (vida = 0).
 * Modificações na lista de missões concluídas pelo personagem.
-	* GET /characters/achievements/
-	* POST /characters/achievements/{mission-id}
+	* PUT /characters/achievements/{mission-id}
 		* Adiciona uma missão completa na lista de missões completas do personagem.
 	* DELETE /characters/achievements/{mission-id}
 		* Remove uma missão da lista de missões feitas

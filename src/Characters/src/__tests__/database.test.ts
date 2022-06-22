@@ -1,23 +1,16 @@
-import { MONGODB_TEST_ADDRESS } from '../defaults'
+import { MONGODB_TEST_ADDRESS, InitializeDatabase, ClearDatabase, CloseDatabase } from '../defaults'
 import {Character} from '../models/Character'
 import mongoose from 'mongoose'
 
-async function Connect(){
-	console.log("Connecting to " + MONGODB_TEST_ADDRESS);
-	await mongoose.connect(MONGODB_TEST_ADDRESS,{
-		authSource:"admin"
-	}).then(()=>{console.log("connected to the database")})
-}
-
 beforeAll(async () => {
-	await Connect()
-}) 
-
-afterAll(async () => {
-	await mongoose.connection.dropDatabase()
-	await mongoose.connection.close()
+	await InitializeDatabase(MONGODB_TEST_ADDRESS)
 })
 
+afterAll(async () => {
+	await ClearDatabase()
+	await CloseDatabase()
+	
+})
 
 describe("Database connection conditions",()=>{
 	/* Check if something isn't on fire */
@@ -39,7 +32,7 @@ describe("Database interaction", () => {
 		/* Search name  */
 		let searchname = 'John of The Johns John'
 		let player = new Character({
-			'user_id':"aaaaaaaaaaaaaaaaaaaaaaaa", /* Ids are ^[0-9a-fA-F]{24}$ */
+			'user_id':"aabaaaaaaaaaaaaaaaaaaaaa", /* Ids are ^[0-9a-fA-F]{24}$ */
 			'name': searchname,
 			'description':'Meanders through dark alleyways carriyng nothing but a big sack full of potatoes, nobody knows why.'
 		})

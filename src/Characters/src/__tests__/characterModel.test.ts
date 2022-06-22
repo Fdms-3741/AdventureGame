@@ -31,7 +31,6 @@ describe("Testing character creation",()=>{
         const character = new Character(testChar)
         await character.save()
        const SearchedCharacter =  await Character.findById(character._id)
-       console.log(SearchedCharacter)
        expect(SearchedCharacter?.user_id).toEqual(new mongoose.Types.ObjectId(testChar.user_id))
        expect(SearchedCharacter?.status.level).toEqual(1)
        expect(SearchedCharacter?.status.lives).toEqual(5)
