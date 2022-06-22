@@ -17,25 +17,29 @@ Usuários
 
 Personagens:
 * Acesso aos dados de personagens
-	* GET /characters: Lista com todos os personagens
-	* GET /characters/{user-id}: Lista com todos os personagens de um usuário
-	* GET /characters/{user-id}/{character-id}: Retorna dados do personagem pertencente ao usuário
+	* [X] GET /characters: Lista com todos os personagens
+	* [X] GET /characters/{user-id}: Lista com todos os personagens de um usuário
+	* [X] GET /characters/{user-id}/{character-id}: Retorna dados do personagem pertencente ao usuário
 * Criação de personagens
-	* POST /characters/{user-id}: Cria um novo personagem para o usuário com user-id
+	* [X] POST /characters/{user-id}: Cria um novo personagem para o usuário com user-id
 		* Recebe apenas nome, imagem e descrição do personagem. Os outros são definidos pelo programa
 		* O nível do personagem sempre começa com 1, a vida sempre começa com 5 e o atributo que começa com 1 é aleatório.
 * Modificações nos status dos personagens
-	* PUT /characters/levelup/{charcters-id}?attribute={attribute-name}: Aumenta o nível do personagem
+	* [X] PUT /characters/levelup/{charcters-id}?attribute={attribute-name}: Aumenta o nível do personagem
 		* Recebe apenas o nome do atributo a incrementar junto ao nível do personagem.
 		* Retorna erro se o nível do personagem for 15 (nivel máximo). 
-	* PUT /characters/takelife/{characters-id}
+	* [X] PUT /characters/takelife/{characters-id}
 		* Remove uma vida do personagem
 		* Retorna erro se o personagem está morto (vida = 0).
+	* [X] PUT /characters/description/{characters-id}
+		* Muda a descricao do personagem
 * Modificações na lista de missões concluídas pelo personagem.
-	* PUT /characters/achievements/{mission-id}
+	* [X] PUT /characters/achievements/{char-id}
+		* Requer {mission_id:"{id de missao}"} que seja um ObjectId válido do mongoose
 		* Adiciona uma missão completa na lista de missões completas do personagem.
-	* DELETE /characters/achievements/{mission-id}
-		* Remove uma missão da lista de missões feitas
+* Remoção de personagem
+	* [X] DELETE /characters/{char-id}
+		* Remove um personagem
 
 Missões
 * CRUD de missões

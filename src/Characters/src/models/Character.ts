@@ -46,7 +46,12 @@ interface CharacterInterface extends mongoose.Document{
 	*/
 	RemoveLife: () => Promise<void>;
 
-	
+	/** achievements
+	 * 
+	 * Achievements are a collection of mission id that a particular character made. 
+	 * It can be shown as achievements for the user and also control the missions made so a mission can't be completed twice by the same char
+	 * */
+	achievements: Array<mongoose.Schema.Types.ObjectId>
 }
 
 const CharacterSchema = new mongoose.Schema({
@@ -67,7 +72,7 @@ const CharacterSchema = new mongoose.Schema({
 		dexterity: {type: Number, min: 0, max: 5,default:0},
 		inteligence: {type: Number,min: 0, max: 5, default: 0}
 	},
-	achievements: Array<Number>
+	achievements: [mongoose.SchemaTypes.ObjectId]
 })
 
  /*

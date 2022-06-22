@@ -2,6 +2,7 @@ import { MONGODB_TEST_ADDRESS, ClearDatabase,CloseDatabase,InitializeDatabase } 
 import request from 'supertest'
 import app from '../app'
 import  mongoose from 'mongoose'
+import { Character } from '../models/Character'
 
 beforeAll(async () => {
 	await InitializeDatabase(MONGODB_TEST_ADDRESS)
@@ -84,6 +85,87 @@ describe("GET /character/:id",()=>{
 })
 
 describe("PUT /characters",()=>{
-	let userId = "AAaaAaAa"
-	let charName = 
+	let userId = "AAaaAaAaaaaaaaaaaaaaaaaa"
+	let charName = "Jhonson"
+	let description = "A long one"
+	let newDescription = "A small one"
+	let charId: string
+
+	it("Should add a character",async () => {
+		let response = await request(app).post(`/characters`).send({
+			user_id: userId,
+			name: charName,
+			description: description 
+		})
+		charId = response.body._id
+	})
+
+	it("Should modify the characters description",async () => {
+		let response = await request(app).put(`/characters/description/${charId}`).send({
+			description: newDescription
+		})
+		expect(response.statusCode).toBe(200)
+		expect(response.body.description).toStrictEqual(newDescription)
+	})
+
+	it("Should increase the chars strength",async () => {
+		let charSearch = await request(app).get(`/characters/${userId}/${charId}`)
+		let currentLevel = charSearch.body.status.level
+		let currentStrength = charSearch.body.attributes.strength
+		let response = await request(app).put(`/characters/levelup/${charId}`).send({attribute:"strength"})
+		expect(response.statusCode).toBe(200)
+		expect(response.body.status.level).toEqual(currentLevel + 1)
+		expect(response.body.attributes.strength).toEqual(currentStrength + 1)
+	})
+	
+	it("Should take one of the character's life",async () => {
+		let charSearch = await request(app).get(`/characters/${userId}/${charId}`)
+		let currentLives = charSearch.body.status.lives
+		let response = await request(app).put(`/characters/takelife/${charId}`).send()
+		expect(response.statusCode).toBe(200)
+		expect(response.body.status.lives).toEqual(currentLives - 1  )
+	})
+	
+	it("Should fail to add mission due to missing mission_id field", async()=>{
+		let missionId = "333333333338333333333338"
+		let response = await request(app).put(`/characters/achievements/${charId}`).send({missiones_id:missionId})
+		expect(response.statusCode).toBe(400)
+		expect(response.body.message).toStrictEqual("No field mission_id was sent")
+	})
+	it("Should add mission id", async() => {
+		let missionId = "333333333333333333333333"
+		let charSearch = await request(app).get(`/characters/${userId}/${charId}`)
+		let achievements = charSearch.body.achievements 
+		expect(achievements).toBeInstanceOf(Array)
+		expect(achievements).toHaveLength(0)
+		console.log(charSearch.body)
+		let response = await request(app).put(`/characters/achievements/${charId}`).send({mission_id:missionId})
+		if (response.statusCode != 200){
+			console.log(response.body)
+		}
+		expect(response.statusCode).toBe(200)
+		expect(response.body.achievements).toHaveLength(1)
+		console.log(response.body.achievements)
+		expect(response.body.achievements[0]).toEqual(missionId)
+	})
+
+})
+
+
+
+describe("DELETE /characters",()=>{
+	let userId = "123456789123456789123456"
+	let charName = "Milton"
+	it("Should delete a newly added character",async () => {
+		let placement = await request(app).post('/characters').send({
+			user_id:userId,
+			name:charName,
+			description:"Valorous sup"
+		})
+		let charId = placement.body._id
+		let attempt = await request(app).delete(`/characters/${charId}`).send()
+		expect(attempt.statusCode).toBe(200)
+		
+	
+	})
 })
