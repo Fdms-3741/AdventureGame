@@ -23,6 +23,27 @@ services:
     env_file:
       - "./.env"
 
+  usersdb:
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+
+  users-dev:
+    depends_on:
+      - usersdb
+    build: 
+      context: .
+      dockerfile: ./docker/microservice.Dockerfile
+      target: development
+      args:
+        PROJECT_ROOT_DIRECTORY: ${USERS_ROOT_DIRECTORY}
+    volumes:
+      - ${USERS_ROOT_DIRECTORY}:/app
+    env_file:
+      - "./.env"
+
   mongo-express:
       image: mongo-express
       restart: always
