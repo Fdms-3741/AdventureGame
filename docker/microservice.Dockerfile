@@ -8,17 +8,20 @@ WORKDIR /app/
 
 FROM base AS development
 
-ARG PROJECT_ROOT_DIRECTORY
-
 CMD [ "/bin/bash" ]
 
 FROM base as test
+
+CMD ["npm","test"]
+
+FROM base AS production
 
 ARG PROJECT_ROOT_DIRECTORY
 
 COPY ${PROJECT_ROOT_DIRECTORY} /app/
 
-
 RUN npm i
 
-CMD ["npm","test"]
+RUN npm run build --if-present
+
+CMD [ "npm","start" ]

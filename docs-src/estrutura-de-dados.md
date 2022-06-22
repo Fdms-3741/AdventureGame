@@ -27,6 +27,18 @@ Esses dados servirão para controle de acesso dos jogadores no sistema e associa
 }
 ```
 
+Recomendações do armazenamento da senha:
+* A senha é enviada em claro para a API.
+* Uma vez recebido a senha, deve ser feita um hash da senha com um salt. Um salt é uma sequência de bytes aleatória e única para cada cliente. 
+* O padrão de armazenamento das senhas se dá da seguinte forma: "${algoritmo-utilizado}${salt}${resultado-do-hash}".
+    * O algoritmo é uma string com o nome do algoritmo. Ex sha-256,md5,blowfish,...
+    * O Salt é uma sequência aleatória que deve ser concatenada **ANTES** da senha do usuário. Seu valor é binário e é salvo nessa string como base 64.
+    * O resultado do hash é o resultado de implementar o algoritmo na senha concatenada com o hash. Considerando o hash como uma função que recebe um array de bytes, temos que esse valor seria sha256({salt} + base64("{password}")). 
+        * Note que aqui {password} é uma string que deve ser convertida em array de bytes.
+
+Recomendações do token:
+* Usamos o token como uma sequência aleatória e única para cada usuário de 64 bytes em base 64.
+
 ## Characters
 
 Contém as informações de cada personagem. 
@@ -35,7 +47,7 @@ Cada personagem tem um id de usuário associado que deve ter sua existência val
 
 Nas descrições do personagem temos a seção do nome, descrição e imagem, strings básicas definidas pelo usuário. Imagem, se for implementada, deve ser em base64 do arquivo de imagem a ser utilizado. 
 
-O personagem tem um objeto de `status` que informa o nível e a condição de vida dele. O campo `level` informa o nível do personagem e deve ser um número inteiro maior que 1. **O nível vai de 0 a 20**. Quanto maior esse nível mais bônus o personagem tem. O campo `lives` é um contador de vida onde cada personagem começa com 3 e a cada missão fracassada ele perde uma vida. **Com 0 vidas o personagem está morto**.
+O personagem tem um objeto de `status` que informa o nível e a condição de vida dele. O campo `level` informa o nível do personagem e deve ser um número inteiro maior que 1. **O nível vai de 0 a 15**. Quanto maior esse nível mais bônus o personagem tem. O campo `lives` é um contador de vida onde cada personagem começa com 3 e a cada missão fracassada ele perde uma vida. **Com 0 vidas o personagem está morto**.
 
 O personagem tem um objeto de `attributes` que define os atributos para cada jogador. Esse valor vai de 0 a 5 e é utilizado diretamente no cálculo de sucesso de um personagem. 
 
@@ -59,7 +71,7 @@ O personagem tem um objeto de `attributes` que define os atributos para cada jog
             "dexterity":4,
             "inteligence":1
     },
-	"missions_made":[332,443,565] // IDs das missões feitas
+	"achievements":[332,443,565] // IDs das missões feitas
 }
 
 ```

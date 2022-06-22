@@ -19,14 +19,14 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
-
+      
   usersdb:
     image: mongo:latest
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
-
+      
 #
 # Testing containers
 # 
@@ -52,7 +52,7 @@ services:
     depends_on:
       - missionsdb
     profiles:
-      - testing
+      - testingFeat
     build: 
       context: .
       dockerfile: ./docker/microservice.Dockerfile

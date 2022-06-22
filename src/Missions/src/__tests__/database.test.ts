@@ -1,5 +1,5 @@
 import { MONGODB_TEST_ADDRESS, InitializeDatabase, ClearDatabase, CloseDatabase } from '../defaults'
-import {Character} from '../models/Character'
+import {Character} from '../models/Mission'
 import mongoose from 'mongoose'
 
 beforeAll(async () => {

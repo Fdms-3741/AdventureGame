@@ -58,6 +58,7 @@ Tutoriais:
 Dúvidas:
 * [Como ler variáveis de ambiente no JS](https://nodejs.dev/learn/how-to-read-environment-variables-from-nodejs)
 * [Exemplo de aplicação com Express e MongoDB com mongoose](https://github.com/puntotech/pokeAPI)
-
+* [Tutorial com mongoose](https://www.youtube.com/watch?v=DZBGEVgL2eE)
+* [Declaração de interfaces e tipos do mongoose no typescript](https://millo-l.github.io/Typescript-mongoose-methods-statics/)
 Links interessantes:
 * [Diagramas em markdown com mermaid](https://mermaid-js.github.io/mermaid/#/)

@@ -8,7 +8,7 @@ app.use(express.urlencoded({extended:false}))
 
 /* Custom logging middleware */
 app.use((req,resp,next) => {
-      console.log(`Request for ${req.path} from ${req.ip} with headers ${req.headers}`)
+      console.log(`Request for ${req.path} from ${req.ip}`)
       next()
 })
 

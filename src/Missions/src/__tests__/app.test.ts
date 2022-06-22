@@ -2,7 +2,7 @@ import { MONGODB_TEST_ADDRESS, ClearDatabase,CloseDatabase,InitializeDatabase } 
 import request from 'supertest'
 import app from '../app'
 import  mongoose from 'mongoose'
-import { Character } from '../models/Character'
+import { Character } from '../models/Mission'
 
 beforeAll(async () => {
 	await InitializeDatabase(MONGODB_TEST_ADDRESS)
