@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.ts",
+    "start": "node dist/server.js",
     "build": "sucrase ./src -d ./dist --transforms typescript,imports",
     "test": "jest"
   },

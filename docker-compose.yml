@@ -52,7 +52,7 @@ services:
     depends_on:
       - missionsdb
     profiles:
-      - testingFeat
+      - testing
     build: 
       context: .
       dockerfile: ./docker/microservice.Dockerfile
@@ -67,6 +67,8 @@ services:
   users-dev:
     depends_on:
       - usersdb
+    profiles:
+      - testing
     build: 
       context: .
       dockerfile: ./docker/microservice.Dockerfile
@@ -97,13 +99,27 @@ services:
     env_file:
       - "./.env"
 
-  frontend:
+  users:
+    depends_on:
+      - charactersdb
     profiles:
       - production
     build: 
       context: .
       dockerfile: ./docker/microservice.Dockerfile
       target: production
+      args:
+        PROJECT_ROOT_DIRECTORY: ${USERS_ROOT_DIRECTORY}
+    env_file:
+      - "./.env"
+    
+  frontend:
+    profiles:
+      - production
+    build: 
+      context: .
+      dockerfile: ./docker/microservice.Dockerfile
+      target: development
       args:
         PROJECT_ROOT_DIRECTORY: ${FRONTEND_ROOT_DIRECTORY}
     env_file:
@@ -122,8 +138,9 @@ services:
         ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
         ME_CONFIG_MONGODB_URL: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@charactersdb/
   
-  # Interaction with API requests
-  hoppscotch:
-    image: hoppscotch/hoppscotch:latest
-    ports:
-      - 3000:3000
+
+
+  jupyter:
+    image: jupyter/minimal-notebook
+    ports: 
+      - 4000:8888
