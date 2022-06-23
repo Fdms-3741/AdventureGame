@@ -2,7 +2,7 @@ import {CHARACTERS_HOST} from '../defaults'
 
 
 /* Exposes an interface for the mission class to handle */
-abstract class CharacterInterface {
+interface CharacterInterface {
     /* Character identifier */
     charId:string;
 
@@ -20,26 +20,26 @@ abstract class CharacterInterface {
 
 }
 
-class Character extends CharacterInterface{
+class Character implements CharacterInterface{
     charId: string;
     charInfo: any;
     level: number;
     requestedAttributeLevel: number;
     
-    constructor(char_id: string, attribute: string) {
-        super();
+    constructor(userIdchar_id: string, attribute: string) {
         this.charId = char_id;
         this.requestedAttribute = attribute;
         this.charInfo = null;
+        this.level = -1;
+        this.requestedAttributeLevel = -1;
     }
+    requestedAttribute: string;
     
     async IncreaseLevel(): Promise<void> {
-        let charInfo = fetch(`http://${CHARACTERS_HOST}/characters/${}`)
+        let charInfo = fetch(`http://${CHARACTERS_HOST}/characters/${this.userId}/${this.charId}`)
     }
     
     async TakeLife(): Promise<void> {
         throw new Error("Method not implemented.");
     }
-
-
 }

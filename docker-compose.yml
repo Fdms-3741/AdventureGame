@@ -111,6 +111,7 @@ services:
     ports:
       - 8008:3000
 
+  # Interaction with mongo databases
   mongo-express:
       image: mongo-express
       restart: always
@@ -120,3 +121,9 @@ services:
         ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USER}
         ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
         ME_CONFIG_MONGODB_URL: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@charactersdb/
+  
+  # Interaction with API requests
+  hoppscotch:
+    image: hoppscotch/hoppscotch:latest
+    ports:
+      - 3000:3000

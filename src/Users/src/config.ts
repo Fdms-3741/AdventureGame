@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 
-const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || 'localhost';
+const SERVER_HOSTNAME = process.env.MICROSSERVICE_USERS || 'localhost';
 const SERVER_PORT = '3000';
 
 const SERVER = {
@@ -28,6 +28,9 @@ const MONGO_OPTIONS = {
     autoIndex: false,
     retryWrites: true
 }
+
+
+
 
 const MONGO = {
     test: MONGODB_TEST_ADDRESS,

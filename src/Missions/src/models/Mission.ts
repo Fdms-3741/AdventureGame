@@ -52,7 +52,7 @@ const MissionSchema = new mongoose.Schema({
 
 MissionSchema.methods.AttemptMission = async function (charId: string){
 	/* Create a Character class and import characters data */
-	
+	new Character
 	/* Calculate outcome of mission */
 	/* Apply outcome to the character */
 

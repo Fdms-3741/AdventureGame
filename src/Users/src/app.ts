@@ -10,6 +10,7 @@ const app = express();
 
 
 /** Connect to Mongo */
+console.log(`Trying to connect to ${config.mongo.url} with options ${config.mongo.options}`)
 mongoose
     .connect(config.mongo.url, config.mongo.options)
     .then((result) => {
