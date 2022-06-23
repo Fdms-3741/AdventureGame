@@ -12,7 +12,8 @@
   "license": "ISC",
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "modulePathIgnorePatterns":["__build__/"]
   },
   "babel": {
     "presets": [

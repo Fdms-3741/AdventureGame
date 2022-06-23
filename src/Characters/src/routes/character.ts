@@ -16,7 +16,7 @@ characterRoute.get("/characters", async(req,res,next) => {
     next()
 })
 
-characterRoute.get("/characters/:id",async (req,res,next) => {
+characterRoute.get("/characters/byuser/:id",async (req,res,next) => {
     try{
         let results: any = await Character.find({user_id:req.params.id})
         res.status(200).send(results)
@@ -26,7 +26,7 @@ characterRoute.get("/characters/:id",async (req,res,next) => {
     next()
 })
 
-characterRoute.get('/characters/:user_id/:char_id',async (req,res,next) => {
+characterRoute.get('/characters/bycharacter/:char_id',async (req,res,next) => {
     try{
         let results: any = await Character.findById(req.params.char_id)
         res.status(200).send(results)

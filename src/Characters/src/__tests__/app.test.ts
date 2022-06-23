@@ -50,7 +50,7 @@ describe("GET /character", ()=>{
 	})
 })
 
-describe("GET /character/:id",()=>{
+describe("GET /character/by----/:ids",()=>{
 	let userId = "aaaaaaaaaaaaaaaaaaaaaaaa";
 	let charName = "Will them";
 
@@ -64,7 +64,7 @@ describe("GET /character/:id",()=>{
 			description:"Valorous sup"
 		})
 		let charId = placement.body._id
-		let response = await request(app).get(`/characters/${userId}`)
+		let response = await request(app).get(`/characters/byuser/${userId}`)
 		console.log(response.body)
 		expect(response?.statusCode).toBe(200)
 		expect(response.body).toBeInstanceOf(Array)
@@ -77,11 +77,12 @@ describe("GET /character/:id",()=>{
 			description:"Valorous sup"
 		})
 		let charId = placement.body._id
-		let response = await request(app).get(`/characters/${userId}/${charId}`)
+		let response = await request(app).get(`/characters/bycharacter/${charId}`)
 		expect(response?.statusCode).toBe(200)
 		expect(response.body._id).toStrictEqual(charId)
 		expect(response.body.name).toStrictEqual(charName)
 	})
+
 })
 
 describe("PUT /characters",()=>{
@@ -109,7 +110,7 @@ describe("PUT /characters",()=>{
 	})
 
 	it("Should increase the chars strength",async () => {
-		let charSearch = await request(app).get(`/characters/${userId}/${charId}`)
+		let charSearch = await request(app).get(`/characters/bycharacter/${charId}`)
 		let currentLevel = charSearch.body.status.level
 		let currentStrength = charSearch.body.attributes.strength
 		let response = await request(app).put(`/characters/levelup/${charId}`).send({attribute:"strength"})
@@ -119,7 +120,7 @@ describe("PUT /characters",()=>{
 	})
 	
 	it("Should take one of the character's life",async () => {
-		let charSearch = await request(app).get(`/characters/${userId}/${charId}`)
+		let charSearch = await request(app).get(`/characters/bycharacter/${charId}`)
 		let currentLives = charSearch.body.status.lives
 		let response = await request(app).put(`/characters/takelife/${charId}`).send()
 		expect(response.statusCode).toBe(200)
@@ -134,7 +135,7 @@ describe("PUT /characters",()=>{
 	})
 	it("Should add mission id", async() => {
 		let missionId = "333333333333333333333333"
-		let charSearch = await request(app).get(`/characters/${userId}/${charId}`)
+		let charSearch = await request(app).get(`/characters/bycharacter/${charId}`)
 		let achievements = charSearch.body.achievements 
 		expect(achievements).toBeInstanceOf(Array)
 		expect(achievements).toHaveLength(0)

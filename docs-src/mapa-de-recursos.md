@@ -18,8 +18,8 @@ Usuários
 Personagens:
 * Acesso aos dados de personagens
 	* [X] GET /characters: Lista com todos os personagens
-	* [X] GET /characters/{user-id}: Lista com todos os personagens de um usuário
-	* [X] GET /characters/{user-id}/{character-id}: Retorna dados do personagem pertencente ao usuário
+	* [X] GET /characters/byuser/{user-id}: Lista com todos os personagens de um usuário
+	* [X] GET /characters/bycharacter/{character-id}: Retorna dados do personagem pertencente ao usuário
 * Criação de personagens
 	* [X] POST /characters/{user-id}: Cria um novo personagem para o usuário com user-id
 		* Recebe apenas nome, imagem e descrição do personagem. Os outros são definidos pelo programa
