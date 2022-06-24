@@ -10,8 +10,6 @@ const NAMESPACE = "User";
 const register = (req: Request, res: Response, next: NextFunction) => {
     let { username, password } = req.body;
 
-    console.log("oi3");
-
     bcryptjs.hash(password, 16, (hashError, hash) => {
         if (hashError)
         {
@@ -53,15 +51,16 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         if (users.length !== 1)
         {
             return res.status(401).json({
-                message: 'Unauthorized'
+                message: 'Unauthorized: user not found'
             });
         }
 
         bcryptjs.compare(password, users[0].password, (error, result) => {
+            console.log(users)
             if (error)
             {
                 return res.status(401).json({
-                    message: 'Unauthorized'
+                    message: 'Unauthorized1'
                 });
             }
             else if (result)
@@ -70,7 +69,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
                     if (_error)
                     {
                         return res.status(401).json({
-                            message: 'Unauthorized',
+                            message: 'Unauthorized2',
                             error: _error
                         })
                     }
@@ -93,12 +92,5 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         });
     });
 };
-
-const teste = (req: Request, res: Response, next: NextFunction) => {
-    console.log("hi");
-    return res.status(200).json({
-        message: "hi"
-    })
-}
 
 export default { register, login, teste };
