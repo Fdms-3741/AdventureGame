@@ -118,7 +118,7 @@ services:
       - production
     build: 
       context: .
-      dockerfile: ./docker/microservice.Dockerfile
+      dockerfile: ${FRONTEND_ROOT_DIRECTORY}/Dockerfile
       target: development
       args:
         PROJECT_ROOT_DIRECTORY: ${FRONTEND_ROOT_DIRECTORY}
