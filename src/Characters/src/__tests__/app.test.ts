@@ -28,13 +28,13 @@ describe("Database connection conditions",()=>{
 
 describe("POST /character", () => {
 	it("Should return 200", async () =>{
-		let response = await request(app).post("/characters").send({"user_id":"aaaaaaaaaaaaaaaaaaaaaaaa","name":"francis","description":"the hero's mission"})
+		let response = await request(app).post("/characters/aaaaaaaaaaaaaaaaaaaaaaaa").send({"name":"francis","description":"the hero's mission"})
 		console.log(response.text)
 		expect(response?.statusCode).toBe(200)
 	})
 
 	it("Should fail due to not having name", async () => {
-		let response = await request(app).post('/characters').send({"user_id":"aaaaaaaaaaaaaaaaaaaaaaaa",'description':"123"})
+		let response = await request(app).post("/characters/aaaaaaaaaaaaaaaaaaaaaaaa").send({'description':"123"})
 		console.log(response.body)
 		expect(response?.statusCode).toBe(400)
 		expect(response?.body.message).toStrictEqual("Data failed to match schema")
@@ -58,7 +58,7 @@ describe("GET /character/by----/:ids",()=>{
 	})
 
 	it("Should return lists for an specific Id",async () => {
-		let placement = await request(app).post('/characters').send({
+		let placement = await request(app).post(`/characters/${userId}`).send({
 			user_id:userId,
 			name:charName,
 			description:"Valorous sup"
@@ -71,8 +71,7 @@ describe("GET /character/by----/:ids",()=>{
 	})
 
 	it("Should return only one character", async ()=>{
-		let placement = await request(app).post('/characters').send({
-			user_id:userId,
+		let placement = await request(app).post(`/characters/${userId}`).send({
 			name:charName,
 			description:"Valorous sup"
 		})
@@ -93,7 +92,7 @@ describe("PUT /characters",()=>{
 	let charId: string
 
 	it("Should add a character",async () => {
-		let response = await request(app).post(`/characters`).send({
+		let response = await request(app).post(`/characters/${userId}`).send({
 			user_id: userId,
 			name: charName,
 			description: description 
@@ -158,7 +157,7 @@ describe("DELETE /characters",()=>{
 	let userId = "123456789123456789123456"
 	let charName = "Milton"
 	it("Should delete a newly added character",async () => {
-		let placement = await request(app).post('/characters').send({
+		let placement = await request(app).post(`/characters/${userId}`).send({
 			user_id:userId,
 			name:charName,
 			description:"Valorous sup"

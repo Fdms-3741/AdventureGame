@@ -31,18 +31,23 @@ characterRoute.get('/characters/bycharacter/:char_id',async (req,res,next) => {
         let results: any = await Character.findById(req.params.char_id)
         res.status(200).send(results)
     }catch(err:any){
+        console.log({message:"Data failed to match schema",details:err.message})
         res.status(400).send({message:err.message})
     }
     next()
 })
 
-characterRoute.post("/characters",async (req,res,next) => {
+characterRoute.post("/characters/:userId",async (req,res,next) => {
     let results :any
     try{
-        results = new Character(req.body)
+        let entry = req.body
+        entry.user_id = req.params.userId
+        console.log(entry)
+        results = new Character(entry)
         await results.save()
         res.status(200).send(results)
     }catch(err:any){
+        console.log({message:"Data failed to match schema",details:err.message})
         res.status(400).send({message:"Data failed to match schema",details:err.message})
     }
     next()
