@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 const SERVER_HOSTNAME = process.env.MICROSSERVICE_USERS || 'localhost';
-const SERVER_PORT = '3000';
+const SERVER_PORT = '80';
 
 const SERVER = {
     hostname: SERVER_HOSTNAME,

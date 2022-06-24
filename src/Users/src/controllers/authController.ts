@@ -51,7 +51,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         if (users.length !== 1)
         {
             return res.status(401).json({
-                message: 'Unauthorized: user not found'
+                message: 'Unauthorized'
             });
         }
 
@@ -60,7 +60,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
             if (error)
             {
                 return res.status(401).json({
-                    message: 'Unauthorized1'
+                    message: 'Unauthorized'
                 });
             }
             else if (result)
@@ -69,7 +69,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
                     if (_error)
                     {
                         return res.status(401).json({
-                            message: 'Unauthorized2',
+                            message: 'Unauthorized',
                             error: _error
                         })
                     }
@@ -93,4 +93,4 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     });
 };
 
-export default { register, login, teste };
+export default { register, login };
