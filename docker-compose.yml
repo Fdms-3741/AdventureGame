@@ -101,7 +101,7 @@ services:
 
   users:
     depends_on:
-      - charactersdb
+      - usersdb
     profiles:
       - production
     build: 

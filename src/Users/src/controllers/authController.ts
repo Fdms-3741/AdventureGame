@@ -10,6 +10,8 @@ const NAMESPACE = "User";
 const register = (req: Request, res: Response, next: NextFunction) => {
     let { username, password } = req.body;
 
+    console.log("oi3");
+
     bcryptjs.hash(password, 16, (hashError, hash) => {
         if (hashError)
         {
