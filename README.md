@@ -1,18 +1,24 @@
 # AdventureGame
+
 Aplicação Web de um jogo de aventura estilo RPG de mesa
 
 # Passo a Passo inicializacao dos microsservicos
+
 1. Na pasta root monte a imagem docker com o comando:
+
 ```
 docker-compose --profile <ambiente> up -d
 ```
+
 Substitua "ambiente" pelo ambiente de desenvolvimento desejado (development ou production)
 
 2. Ambiente development
-2. 1. A seguir rode o servidor desejado utilizando o comando:
+3. 1. A seguir rode o servidor desejado utilizando o comando:
+
 ```
 docker-compose --profile testing run --rm <NOME_DO_CONTEINER_DE_AMBIENTE_NODE_CRIADO> <COMANDO_INICIALIZACAO>
 ```
+
 NOME_DO_CONTEINER_DE_AMBIENTE_NODE_CRIADO:
 users-dev: microsserviço de auth e usuarios
 characters-dev: microsserviço de personagens
@@ -24,16 +30,20 @@ npm start: microsserviço de personagens
 npm start: microsserviço de missoes
 
 2. 2. Procure o ip do microsservico
-Com o codigo abaixo procure o nome do container do projeto
+      Com o codigo abaixo procure o nome do container do projeto
+
 ```
 docker network ls
 ```
+
 ![NETWORK_LS](docs-src/assets/imgs_readme/network_ls.png)
 
 A seguir procure o ip do microsserviço desejado com o comando:
+
 ```
 docker network inspect <NOME_CONTAINER>
 ```
+
 No caso do exemplo, "NOME_CONTAINER" seria adventuregame_default.
 Na imagem abaixo, escolhemos o microsservico de users, que foi iniciado no passo 2.1, e procuramos seu endereço de IP que será utilizado para fazer a requisicao
 
@@ -43,6 +53,7 @@ Na imagem abaixo, escolhemos o microsservico de users, que foi iniciado no passo
 
 Como houve um problema para o mapeamento de portas utilizando o docker para os microsservicos. Utilizamos o notebook jupyter para realizar o mesmo.
 Primeiramente roda-se o codigo abaixo:
+
 ```
 from requests import get, post, put, delete
 import json
@@ -67,8 +78,10 @@ body = {"atributo1": "valor1", "atributo2": "atributo2"}
 
 Interact(post, "<IP>/<ENDPOINT>", body)
 ```
+
 Em que, "IP" é o copiado no passo anterior e "ENDPOINT" e a rota desejada.
 Por exemplo, no caso do users, caso deseja-se fazer um cadastro teremos a seguinte requisicao:
+
 ```
 body = {"username": "teste", "password": "teste"}
 
@@ -76,9 +89,32 @@ Interact(post, "http://172.23.0.10:3000/register", body)
 ```
 
 3. Teste ambiente de Desenvolvimento
-Para rodar os testes de o comando:
+   Para rodar os testes de o comando:
+
 ```
 docker-compose --profile testing run --rm <NOME_DO_CONTEINER_DE_AMBIENTE_NODE_CRIADO> npm test
 ```
 
 4. Ambiente de Producao
+
+# Ambientes Docker
+
+Para a execução dos microsserviços, há duas formas diferentes de instanciar todas as imagens: Modo "testing" e modo "production". O modo testing é onde os conteineres é onde os conteineres executam o bash e permitem a entrada em um shell do conteiner para execução de comandos arbitrários. No modo production, todos os conteineres são instanciados com o comando "npm start" para a execução dos respectivos servidores no ambiente próprio pra produção.
+
+## Modo testing
+
+No modo testing, execute:
+
+```bash
+docker-compose --profile testing up -d
+```
+
+Para a inicialização de todos os conteineres auxiliares do sistema.
+
+Para a execução de testes, execute o comando:
+
+```bash
+docker-compose --profile testing run <conteiner-teste> npm test
+```
+
+Para executar os testes unitários. Atualmente apenas o "characters-dev" pode ser instanciado.
