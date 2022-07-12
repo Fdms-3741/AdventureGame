@@ -90,6 +90,9 @@ $$nível\; do\; personagem + RandInt(1,20) + modificador\; do\; atributo\; selec
     "id":21,
     "name":"Nome da missão",
     "description":"História, objetivo e outras informações",
+    "image":"Imagem que descreve a missão, se houver.",
+    "successText":"Texto a ser exibido se o usuário completou a missão",
+    "failureText":"Texto a ser exibido se o usuário falhou a missão",
     "difficulty_value":20,
     "modifier":"strength",
 }
