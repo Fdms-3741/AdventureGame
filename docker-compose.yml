@@ -86,6 +86,23 @@ services:
     env_file:
       - "./.env"
 
+  broker_dev:
+    depends_on:
+      - broker
+    profiles:
+      - testing
+    build: 
+      context: .
+      dockerfile: ./docker/microservice.Dockerfile
+      target: development
+      args:
+        PROJECT_ROOT_DIRECTORY: ${BROKER_TEST_ROOT_DIRECTORY}
+    volumes:
+      - ${BROKER_TEST_ROOT_DIRECTORY}:/app
+    env_file:
+      - "./.env"
+
+
 #
 # Production containers
 #
