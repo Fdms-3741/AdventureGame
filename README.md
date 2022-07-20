@@ -52,7 +52,20 @@ Na imagem abaixo, escolhemos o microsservico de users, que foi iniciado no passo
 2. 3. Inicie o jupyter para fazer as requisicoes
 
 Como houve um problema para o mapeamento de portas utilizando o docker para os microsservicos. Utilizamos o notebook jupyter para realizar o mesmo.
-Primeiramente roda-se o codigo abaixo:
+
+Primeiramente roda-se o codigo abaixo e copie o token marcado na imagem.
+
+```
+docker-compose --profile testing logs jupyter
+```
+![NETWORK_INSPECT](docs-src/assets/imgs_readme/token_jupyter.png)
+
+Então, acesse o jupyter, de onde serão feitas as requisições, através do endpoint a seguir:
+```
+localhost:4000/<TOKEN>
+```
+
+Dentro do jupyter, copie e rode esse primeiro bloco de código:
 
 ```
 from requests import get, post, put, delete

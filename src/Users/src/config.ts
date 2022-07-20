@@ -19,7 +19,7 @@ const TOKEN = {
 }
 
 const MONGODB_ADDRESS = 'mongodb://' + process.env.MONGODB_USER + ":" + process.env.MONGODB_PASSWORD + "@" + process.env.MONGODB_USERS_HOST
-const MONGODB_TEST_ADDRESS = MONGODB_ADDRESS + "tests?authSource=admin&w=1"
+const MONGODB_TEST_ADDRESS = MONGODB_ADDRESS + "/tests?authSource=admin&w=1"
 const MONGO_OPTIONS = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -28,9 +28,6 @@ const MONGO_OPTIONS = {
     autoIndex: false,
     retryWrites: true
 }
-
-
-
 
 const MONGO = {
     test: MONGODB_TEST_ADDRESS,

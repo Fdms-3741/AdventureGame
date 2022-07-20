@@ -3,14 +3,35 @@ import bcryptjs, { hash } from 'bcryptjs'
 import mongoose from 'mongoose'
 import User from '../models/user'
 import signJWT from '../functions/signJWT'
-import logging from '../logging'
 
 const NAMESPACE = "User";
 
-const register = (req: Request, res: Response, next: NextFunction) => {
+const register = async (req: Request, res: Response, next: NextFunction) => {
     let { username, password } = req.body;
 
-    bcryptjs.hash(password, 16, (hashError, hash) => {
+    if ((username === null) || (password === null)) {
+        return res.status(400).json({
+            message: 'Failed to register'
+        })
+    };
+
+    if ((username === undefined) || (password === undefined)) {
+        return res.status(400).json({
+            message: 'Failed to register'
+        })
+    };
+
+    let existUser = await User.findOne({
+            'username': username
+        }, "-_password");
+    
+    if (existUser) {
+        return res.status(400).json({
+            message: 'Failed to register'
+        });
+    }
+    
+    bcryptjs.hash(password, 12, (hashError, hash) => {
         if (hashError)
         {
             return res.status(500).json({
@@ -35,7 +56,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
             })
             .catch ((error) => {
               return res.status(500).json({
-                   message: error.message,
+                    message: error.message,
                     error
                 });
             });
@@ -46,6 +67,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     let { username, password } = req.body;
 
     User.find({ username })
+    .select('+password')
     .exec()
     .then((users) => {
         if (users.length !== 1)
@@ -56,7 +78,6 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         }
 
         bcryptjs.compare(password, users[0].password, (error, result) => {
-            console.log(users)
             if (error)
             {
                 return res.status(401).json({
@@ -81,6 +102,11 @@ const login = (req: Request, res: Response, next: NextFunction) => {
                             user: users[0]
                         });
                     }   
+                });
+            }
+            else {
+                return res.status(401).json({
+                    message: 'Unauthorized'
                 });
             }
         });
