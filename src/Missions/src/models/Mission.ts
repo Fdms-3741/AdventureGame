@@ -25,12 +25,16 @@ interface MissionInterface extends mongoose.Document{
 
 	/** AttemptMission 
 	 * 
-	 * Will take the value from the 
+	 * Will take the value from the character Id and apply its attributes in the mission attempt.
+	 * If it succeds, sends the char-id and the mission-id in the MISSION_COMPLETED channel, if it fails,
+	 * sends the char and mission ids in the MISSION_FAILED channel.
+	 * 
+	 * Returns the status of the mission.
 	 * 
 	 * @param char_id [in] Id of the character that is going to attempt to complete
 	 * 
-	 * 
 	*/
+	AttemptMission: () => Promise<void>;
 
 }
 

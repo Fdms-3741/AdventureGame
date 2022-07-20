@@ -36,7 +36,7 @@ class Character implements CharacterInterface{
     requestedAttribute: string;
     
     async IncreaseLevel(): Promise<void> {
-        let charInfo = fetch(`http://${CHARACTERS_HOST}/characters/${this.userId}/${this.charId}`)
+        let charInfo = fetch(`http://${CHARACTERS_HOST}/characters/bychar/${this.charId}`)
     }
     
     async TakeLife(): Promise<void> {

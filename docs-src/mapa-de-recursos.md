@@ -2,13 +2,11 @@
 
 Aqui descrevemos qual recurso é disponibilizado por cada microsserviço e o que cada um recebe, faz e devolve.
 
-**Nota importante**: Ao conversar com o professor, ele disse que cada microsserviço deve ter reter toda a lógica de negócio que envolve os dados que trabalha. Como se fossem mini-MVCs para cada parte. Isso significa que teremos que adicionar lógicas internas como por exemplo "subir nível" nos contêineres de personagem, e assim eles ficam mais complexos. Em contra-partida, de 6 microsserviços agora são 3.
-
 Usuários
 * Acesso ao banco de dados de usuários
-	* GET /users: Retorna lista de usuários ou usuário com base nos termos de busca enviados
-		* Pode conter o seguinte corpo em JSON: {name?: "Nome da pessoa", id?: "id do mongoose"}
-	* POST /users: Adiciona novo usuário
+	* POST /login: Retorna lista de usuários ou usuário com base nos termos de busca enviados
+		* Pode conter o seguinte corpo em JSON: {user: "Nome da pessoa", password:"password "}
+	* POST /register: Adiciona novo usuário
 	* DELETE /users/{user-id} 
 * Autenticação de usuários
 	* GET /users/auth: Passa o hash da senha e valida com o que tem no banco de dados. Retorna o token de autenticação
@@ -43,14 +41,14 @@ Personagens:
 
 Missões
 * CRUD de missões
-	* GET /missions: Lista de missões disponíveis
-	* GET /missions/{mission-id}: Retorna uma única missão
-	* POST /missions: Cria uma nova missão
+	* [ ] GET /missions: Lista de missões disponíveis
+	* [ ] GET /missions/{mission-id}: Retorna uma única missão
+	* [ ] POST /missions: Cria uma nova missão
 		* Recebe todos os dados contidos na estrutura de missões
-	* PUT /missions: Modifica algum parâmetro da missão
-	* DELETE /missions: Apaga uma missão
+	* [ ] PUT /missions: Modifica algum parâmetro da missão
+	* [ ] DELETE /missions: Apaga uma missão
 * Teste de missões
-	* GET /missions/do/{player-id}: Faz o personagem realizar uma missão e retorna o status de feitio da tarefa
+	* [ ] GET /missions/do/{player-id}: Faz o personagem realizar uma missão e retorna o status de feitio da tarefa
 		* Deve adquirir informações do personagem e alterar as informações do personagem a depender do resultado da missão
 		* O cálculo para saber se a missão foi bem sucedida é `(ClasseDeDificuldade < NivelPersonagem + NivelAtributoDaMissao + InteiroAleatorioEntre(1,20))`
 
